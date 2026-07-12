@@ -1,1 +1,278 @@
-# ai-automation-
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Automation Engineer Roadmap</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0f172a;
+    color:white;
+}
+
+header{
+    background:#1e293b;
+    padding:20px;
+    text-align:center;
+}
+
+.progress{
+    background:#334155;
+    border-radius:20px;
+    height:22px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    background:#22c55e;
+    height:100%;
+    width:0%;
+    transition:0.3s;
+}
+
+.container{
+    padding:20px;
+}
+
+.card{
+    background:#1e293b;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:12px;
+}
+
+.card h3{
+    margin-top:0;
+}
+
+a{
+    color:#60a5fa;
+}
+
+button{
+    background:#22c55e;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.done{
+    opacity:0.6;
+}
+
+.done h3{
+    text-decoration:line-through;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🚀 AI Automation Engineer</h1>
+
+    <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <p id="progressText">התקדמות: 0%</p>
+</header>
+
+<div class="container">
+
+    <h2>📚 מסלול לימוד</h2>
+
+    <div id="courses"></div>
+
+    <h2>🎯 פרויקט גמר</h2>
+
+    <div class="card">
+        <h3>AI Test Automation Assistant</h3>
+
+        <ul>
+            <li>יצירת Test Cases באמצעות AI</li>
+            <li>יצירת Selenium Java Code</li>
+            <li>יצירת API Tests</li>
+            <li>יצירת Reports</li>
+        </ul>
+    </div>
+
+</div>
+
+<footer>
+    נבנה במיוחד עבור David 💪
+</footer>
+
+<script>
+
+const courses = [
+
+{
+name:"Git",
+link:"https://www.youtube.com/watch?v=RGOj5yH7evk",
+description:"לימוד Git ו-GitHub"
+},
+
+{
+name:"SQL",
+link:"https://www.youtube.com/watch?v=HXV3zeQKqGY",
+description:"SQL למתחילים"
+},
+
+{
+name:"Python",
+link:"https://www.youtube.com/watch?v=rfscVS0vtbw",
+description:"Python Foundations"
+},
+
+{
+name:"Docker",
+link:"https://docs.docker.com/get-started/",
+description:"Docker Basics"
+},
+
+{
+name:"AI For Everyone",
+link:"https://www.coursera.org/learn/ai-for-everyone",
+description:"מבוא לעולם ה-AI"
+},
+
+{
+name:"Machine Learning",
+link:"https://www.coursera.org/specializations/machine-learning-introduction",
+description:"למידת מכונה"
+},
+
+{
+name:"Generative AI",
+link:"https://www.coursera.org/learn/generative-ai-for-everyone",
+description:"ChatGPT ו-LLMs"
+},
+
+{
+name:"Prompt Engineering",
+link:"https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/",
+description:"כתיבת Prompts מקצועיים"
+},
+
+{
+name:"OpenAI API",
+link:"https://platform.openai.com/docs",
+description:"חיבור אפליקציות ל-AI"
+},
+
+{
+name:"LangChain",
+link:"https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/",
+description:"בניית אפליקציות AI"
+},
+
+{
+name:"Vector Databases",
+link:"https://www.deeplearning.ai/short-courses/building-applications-vector-databases/",
+description:"RAG ו-Embeddings"
+},
+
+{
+name:"CrewAI",
+link:"https://learn.crewai.com/",
+description:"AI Agents"
+},
+
+{
+name:"Azure AI",
+link:"https://learn.microsoft.com/en-us/training/azure/",
+description:"Cloud AI"
+}
+
+];
+
+const coursesDiv = document.getElementById('courses');
+
+function renderCourses(){
+
+coursesDiv.innerHTML = "";
+
+let completed = 0;
+
+courses.forEach((course,index)=>{
+
+const isDone =
+localStorage.getItem("course_"+index) === "done";
+
+if(isDone){
+completed++;
+}
+
+const card = document.createElement("div");
+
+card.className =
+"card " + (isDone ? "done" : "");
+
+card.innerHTML = `
+<h3>${index+1}. ${course.name}</h3>
+
+<p>${course.description}</p>
+
+<p>
+${course.link}
+פתח קורס
+</a>
+</p>
+
+<button onclick="completeCourse(${index})">
+${isDone ? "✅ הושלם" : "סמן כהושלם"}
+</button>
+`;
+
+coursesDiv.appendChild(card);
+
+});
+
+updateProgress(completed);
+
+}
+
+function completeCourse(index){
+
+localStorage.setItem(
+"course_"+index,
+"done"
+);
+
+renderCourses();
+
+}
+
+function updateProgress(done){
+
+const percent =
+Math.round((done / courses.length) * 100);
+
+document.getElementById("progressBar")
+.style.width = percent + "%";
+
+document.getElementById("progressText")
+.innerText =
+"✅ התקדמות: " + percent + "%";
+
+}
+
+renderCourses();
+
+</script>
+
+</body>
+</html>
