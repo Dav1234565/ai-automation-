@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Automation Engineer Roadmap</title>
+
+<style>
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#0f172a;
+color:white;
+}
+
+header{
+padding:25px;
+background:#1e293b;
+text-align:center;
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.progress{
+height:24px;
+background:#334155;
+border-radius:30px;
+overflow:hidden;
+margin-top:15px;
+}
+
+.progress-bar{
+height:100%;
+width:0%;
+background:#22c55e;
+transition:0.3s;
+}
+
+.container{
+padding:20px;
+max-width:1000px;
+margin:auto;
+}
+
+.section-title{
+color:#38bdf8;
+margin-top:40px;
+margin-bottom:20px;
+}
+
+.card{
+background:#1e293b;
+padding:16px;
+border-radius:14px;
+margin-bottom:15px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.card h3{
+margin-top:0;
+}
+
+.card a{
+display:inline-block;
+margin-top:8px;
+color:#60a5fa;
+font-weight:bold;
+text-decoration:none;
+}
+
+.card a:hover{
+color:white;
+}
+
+button{
+padding:10px 15px;
+background:#22c55e;
+border:none;
+border-radius:10px;
+color:white;
+cursor:pointer;
+margin-top:10px;
+}
+
+.done{
+opacity:0.6;
+}
+
+.done h3{
+text-decoration:line-through;
+}
+
+.path{
+line-height:2;
+font-size:18px;
+text-align:center;
+}
+
+.project{
+padding:12px;
+background:#111827;
+border-radius:10px;
+margin-top:10px;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+
+<h1>🚀 AI Automation Engineer</h1>
+
+<div class="progress">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+
+<p id="progressText">התקדמות: 0%</p>
+
+</header>
+
+<div class="container">
+
+<h2 class="section-title">📚 שלב 1 - יסודות</h2>
+<div id="stage1"></div>
+
+<h2 class="section-title">🤖 שלב 2 - AI</h2>
+<div id="stage2"></div>
+
+<h2 class="section-title">☁️ שלב 3 - Cloud & Agents</h2>
+<div id="stage3"></div>
+
+<h2 class="section-title">🚀 פרויקטים</h2>
+
+<div class="project">AI Test Case Generator</div>
+<div class="project">AI Selenium Generator</div>
+<div class="project">AI API Testing Assistant</div>
+<div class="project">AI QA Agent</div>
+
+<h2 class="section-title">🎯 מסלול קריירה</h2>
+
+<div class="card path">
+Junior QA
+<br>⬇️
+<br>Automation Engineer
+<br>⬇️
+<br>Senior Automation Engineer
+<br>⬇️
+<br>AI Automation Engineer
+<br>⬇️
+<br>AI Architect
+</div>
+
+</div>
+
+<script>
+
+const courses = [
+
+{
+container:"stage1",
+title:"Git",
+description:"Git & GitHub",
+link:"https://www.youtube.com/watch?v=RGOj5yH7evk"
+},
+
+{
+container:"stage1",
+title:"SQL",
+description:"SQL Full Course",
+link:"https://www.youtube.com/watch?v=HXV3zeQKqGY"
+},
+
+{
+container:"stage1",
+title:"Python",
+description:"Python Full Course",
+link:"https://www.youtube.com/watch?v=rfscVS0vtbw"
+},
+
+{
+container:"stage1",
+title:"Docker",
+description:"Docker Getting Started",
+link:"https://docs.docker.com/get-started/"
+},
+
+{
+container:"stage2",
+title:"AI For Everyone",
+description:"Andrew Ng",
+link:"https://www.coursera.org/learn/ai-for-everyone"
+},
+
+{
+container:"stage2",
+title:"Machine Learning",
+description:"Machine Learning Specialization",
+link:"https://www.coursera.org/specializations/machine-learning-introduction"
+},
+
+{
+container:"stage2",
+title:"Generative AI",
+description:"Generative AI For Everyone",
+link:"https://www.coursera.org/learn/generative-ai-for-everyone"
+},
+
+{
+container:"stage2",
+title:"Prompt Engineering",
+description:"DeepLearning.AI",
+link:"https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/"
+},
+
+{
+container:"stage2",
+title:"OpenAI API",
+description:"Official Documentation",
+link:"https://platform.openai.com/docs"
+},
+
+{
+container:"stage2",
+title:"LangChain",
+description:"LangChain For LLM Applications",
+link:"https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/"
+},
+
+{
+container:"stage2",
+title:"Vector Databases",
+description:"RAG & Embeddings",
+link:"https://www.deeplearning.ai/short-courses/building-applications-vector-databases/"
+},
+
+{
+container:"stage3",
+title:"CrewAI",
+description:"AI Agents",
+link:"https://learn.crewai.com/"
+},
+
+{
+container:"stage3",
+title:"Azure AI",
+description:"Microsoft Learn",
+link:"https://learn.microsoft.com/en-us/training/azure/"
+}
+
+];
+
+function markDone(index){
+
+localStorage.setItem("course-"+index,"done");
+render();
+
+}
+
+function render(){
+
+document.getElementById("stage1").innerHTML="";
+document.getElementById("stage2").innerHTML="";
+document.getElementById("stage3").innerHTML="";
+
+let doneCount = 0;
+
+courses.forEach((course,index)=>{
+
+const done =
+localStorage.getItem("course-"+index)==="done";
+
+if(done){
+doneCount++;
+}
+
+const card = document.createElement("div");
+
+card.className =
+"card " + (done ? "done" : "");
+
+card.innerHTML = `
+<h3>${course.title}</h3>
+
+<p>${course.description}</p>
+
+${course.link}
+‎📖 פתח קורס
+</a>
+
+<br>
+
+<button onclick="markDone(${index})">
+${done ? "✅ הושלם" : "סמן כהושלם"}
+</button>
+`;
+
+document
+.getElementById(course.container)
+.appendChild(card);
+
+});
+
+const percent =
+Math.round((doneCount / courses.length) * 100);
+
+document.getElementById("progressBar")
+.style.width = percent + "%";
+
+document.getElementById("progressText")
+.innerText = "✅ התקדמות: " + percent + "%";
+
+}
+
+render();
+
+</script>
+
+</body>
+</html>
